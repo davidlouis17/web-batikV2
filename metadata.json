@@ -1,0 +1,6 @@
+{
+  "name": "Putera Puteri Batik Jatim",
+  "description": "Website resmi Paguyuban Putera Puteri Batik Jawa Timur dengan e-katalog, filosofi motif batik, kalender event, serta dashboard admin terintegrasi kecerdasan buatan (Gemini AI) untuk otomatisasi deskripsi dan konten seni.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

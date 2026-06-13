@@ -1,0 +1,133 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Premium Batik products offered for purchase",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The unique product identifier" },
+        "name": { "type": "string", "description": "Name of the product" },
+        "description": { "type": "string", "description": "Philosophical description of the batik" },
+        "price": { "type": "number", "description": "Price in IDR" },
+        "category": { "type": "string", "description": "Collection category" },
+        "images": { "type": "array", "description": "ListOf image base64 or URL paths" },
+        "status": { "type": "string", "description": "Availability status" },
+        "displayOrder": { "type": "number", "description": "Display sort hierarchy key" },
+        "philosophy": { "type": "string", "description": "Deeper cultural philosophy narration" },
+        "isPopular": { "type": "boolean", "description": "Highlight on home section" }
+      },
+      "required": ["id", "name", "price", "category", "images", "status"]
+    },
+    "Event": {
+      "title": "Event",
+      "description": "Cultural event or workshop scheduled",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "date": { "type": "string" },
+        "description": { "type": "string" },
+        "image": { "type": "string" },
+        "location": { "type": "string" },
+        "status": { "type": "string" },
+        "type": { "type": "string" },
+        "registrationLink": { "type": "string" },
+        "registrantsCount": { "type": "number" }
+      },
+      "required": ["id", "title", "date", "image", "location", "status"]
+    },
+    "Testimonial": {
+      "title": "Testimonial",
+      "description": "Pecinta batik customer review or testimonial",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "content": { "type": "string" },
+        "rating": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "name", "content", "rating", "status"]
+    },
+    "WebsiteSettings": {
+      "title": "WebsiteSettings",
+      "description": "Global custom website metadata settings",
+      "type": "object",
+      "properties": {
+        "siteTitle": { "type": "string" },
+        "siteDescription": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "faviconUrl": { "type": "string" },
+        "metaTags": { "type": "string" },
+        "socialMedia": { "type": "object" },
+        "contactInfo": { "type": "object" },
+        "footerCopyright": { "type": "string" }
+      },
+      "required": ["siteTitle", "footerCopyright"]
+    },
+    "Subscriber": {
+      "title": "Subscriber",
+      "description": "Batik community newsletter subscriber",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "subscribeDate": { "type": "string" }
+      },
+      "required": ["id", "email"]
+    },
+    "AnalyticsData": {
+      "title": "AnalyticsData",
+      "description": "Visitor and catalog stats tracking",
+      "type": "object",
+      "properties": {
+        "totalVisitors": { "type": "number" },
+        "popularPages": { "type": "array" },
+        "catalogConversions": { "type": "array" },
+        "eventStats": { "type": "array" }
+      },
+      "required": ["totalVisitors"]
+    },
+    "GalleryPhoto": {
+      "title": "GalleryPhoto",
+      "description": "A photo shown in the main horizontal scrolling gallery",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "url": { "type": "string" }
+      },
+      "required": ["id", "url"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Product collection"
+    },
+    "/events/{eventId}": {
+      "schema": "Event",
+      "description": "Scheduled events"
+    },
+    "/testimonials/{testimonialId}": {
+      "schema": "Testimonial",
+      "description": "Public community feedback testimonials"
+    },
+    "/settings/{settingDoc}": {
+      "schema": "WebsiteSettings",
+      "description": "Website configurations"
+    },
+    "/subscribers/{subscriberId}": {
+      "schema": "Subscriber",
+      "description": "Saved newsletter subscribers"
+    },
+    "/analytics/{analyticsDoc}": {
+      "schema": "AnalyticsData",
+      "description": "Aggregated visitor analytics and metrics"
+    },
+    "/gallery/{photoId}": {
+      "schema": "GalleryPhoto",
+      "description": "Gallery carousels"
+    }
+  }
+}

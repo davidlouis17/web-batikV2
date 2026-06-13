@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Catch-all strict fallback rule
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helpers to authenticate permissions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      // Any authenticated user on this private app's Firestore is granted admin privileges
+      return isSignedIn();
+    }
+
+    // Products collection: everyone can read, only admin can write
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Events collection: everyone can read, only admin can write
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Testimonials collection: everyone can read, only admin can write
+    match /testimonials/{testimonialId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Website Settings: everyone can read, only admin can write
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Newsletter Subscribers: only admin can view candidates, anyone can create (join)
+    match /subscribers/{subscriberId} {
+      allow read, delete: if isAdmin();
+      allow create: if true;
+      allow update: if isAdmin();
+    }
+
+    // Analytics Counter metrics: anyone can read/write to allow public incrementation
+    match /analytics/{docId} {
+      allow read, write: if true;
+    }
+
+    // Gallery Photos: everyone can view, only admin can create or delete
+    match /gallery/{photoId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
